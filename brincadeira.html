@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para a minha Valentina</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            overflow: hidden; /* Evita barras de scroll se as coisas crescerem muito */
+        }
+
+        h1 {
+            color: #333;
+            margin: 20px;
+            font-size: 2rem;
+            z-index: 10;
+        }
+
+        /* Contentor da imagem para garantir que ela fica centrada */
+        .image-container {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            z-index: 5;
+        }
+
+        img {
+            max-height: 100%;
+            max-width: 90vw;
+            border-radius: 10px;
+            transition: all 0.3s ease; /* Animação suave */
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            font-weight: bold;
+        }
+
+        #btn-sim {
+            background-color: #4CAF50; /* Verde */
+            color: white;
+        }
+
+        #btn-sim:hover {
+            background-color: #45a049;
+        }
+
+        #btn-nao {
+            background-color: #f44336; /* Vermelho */
+            color: white;
+        }
+
+        #btn-nao:hover {
+            background-color: #d32f2f;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="image-container">
+        <img id="main-image" src="minion-forest-2426521526.jpg" alt="Minion">
+    </div>
+
+    <h1>Aceitas ser a minha Valentina mesmo à distância?</h1>
+
+    <div class="buttons">
+        <button id="btn-sim" onclick="clicouSim()">Sim</button>
+        <button id="btn-nao" onclick="clicouNao()">Não</button>
+    </div>
+
+    <script>
+        // --- CONFIGURAÇÃO DAS IMAGENS ---
+        // Certifica-te que os nomes dos ficheiros na pasta são IGUAIS a estes:
+        
+        const imgInicial = "minion-forest-2426521526.jpg";
+        const imgNao = "8f2b38-2672104857.jpg"; // Minions tristes/choque
+        
+        // Lista de imagens para quando clica no SIM
+        const imagensSim = [
+            "84b2b12dc5679a2d2b0d39a5f41ea1d7-1749655422.jpg", // Língua de fora
+            "9858b0f66ba484cc8e985448686ea42b-3402916098.jpg", // Olho perto
+            "a2cf0fade810945aa025860ea55fe758-3781238597.jpg", // Kanye
+            "ef6ea23d6feaf938b1690c89ba821963-1811217469.jpg", // Óculos felizes
+            "oar2-2776934440.jpg" // Olhar fixo
+        ];
+
+        // Variáveis de controlo
+        let escalaImagem = 1.0; // Tamanho inicial da imagem
+        let escalaBotaoSim = 1.0; // Tamanho inicial do botão
+        const imagemElemento = document.getElementById('main-image');
+        const botaoSim = document.getElementById('btn-sim');
+
+        function clicouNao() {
+            // 1. Muda a imagem para a dos minions tristes
+            imagemElemento.src = imgNao;
+
+            // 2. Aumenta a imagem
+            escalaImagem += 0.3; // Aumenta 30% a cada clique
+            imagemElemento.style.transform = `scale(${escalaImagem})`;
+            
+            // Opcional: Resetar o botão Sim se quiseres que volte ao normal
+            // escalaBotaoSim = 1.0;
+            // botaoSim.style.transform = `scale(${escalaBotaoSim})`;
+        }
+
+        function clicouSim() {
+            // 1. Resetar o tamanho da imagem (caso tenha clicado em não antes)
+            escalaImagem = 1.0;
+            imagemElemento.style.transform = `scale(${escalaImagem})`;
+
+            // 2. Escolher uma imagem aleatória da lista "Sim"
+            const indiceAleatorio = Math.floor(Math.random() * imagensSim.length);
+            imagemElemento.src = imagensSim[indiceAleatorio];
+
+            // 3. Aumentar o botão Sim
+            escalaBotaoSim += 0.2; // Aumenta 20% a cada clique
+            botaoSim.style.transform = `scale(${escalaBotaoSim})`;
+        }
+    </script>
+
+</body>
+</html>
